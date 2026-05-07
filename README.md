@@ -36,6 +36,7 @@ Open http://localhost:3000 for the survey and http://localhost:3000/results.html
 |----------|----------|-------------|
 | `PORT` | No (default: `3000`) | Server port |
 | `RESULTS_PASSPHRASE` | **Yes** | Passphrase required to view results and export CSV. The server will not start without it. |
+| `DATABASE_URL` | **Yes** | PostgreSQL connection string. Provided automatically by Render when you link a Postgres instance. |
 
 ## Deploying to Render
 
@@ -45,10 +46,10 @@ Open http://localhost:3000 for the survey and http://localhost:3000/results.html
 4. Set `RESULTS_PASSPHRASE` in the environment variables.
 5. Deploy and share the URL.
 
-> **Note:** Render's free tier uses ephemeral disk, so the SQLite database resets on service restart. For multi-day collection, use the Starter tier ($7/mo) which includes persistent disk.
+> **Note:** Uses Render's free PostgreSQL tier, so data persists across restarts and redeploys. The free Postgres instance is available for 90 days.
 
 ## Tech stack
 
 - Node.js + Express
-- SQLite via better-sqlite3
+- PostgreSQL via pg
 - Vanilla HTML/CSS/JS (no build step)
