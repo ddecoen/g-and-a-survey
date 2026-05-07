@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G&amp;A Offsite Survey - Santa Cruz, May 2026</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">G&amp;A Offsite</div>
+      <h1>Santa Cruz Offsite Survey</h1>
+      <p class="subtitle">May 2026 &middot; Share your biggest takeaways</p>
+    </header>
+
+    <form id="survey-form">
+      <div class="form-group">
+        <label for="name">Your Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" required placeholder="e.g. Jane Smith">
+      </div>
+
+      <div class="form-group">
+        <label for="team">Team / Function <span class="required">*</span></label>
+        <select id="team" name="team" required>
+          <option value="">Select your team...</option>
+          <option value="People">People</option>
+          <option value="Finance">Finance</option>
+          <option value="Accounting">Accounting</option>
+          <option value="IT">IT</option>
+          <option value="Recruiting">Recruiting</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="top_takeaway">What was your #1 takeaway from the offsite? <span class="required">*</span></label>
+        <textarea id="top_takeaway" name="top_takeaway" required rows="3" placeholder="What stuck with you most?"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="most_valuable_session">Which session or activity was most valuable? <span class="required">*</span></label>
+        <select id="most_valuable_session" name="most_valuable_session" required>
+          <option value="">Select a session...</option>
+          <optgroup label="Day 1">
+            <option value="People and Finance at Scale">People and Finance at Scale</option>
+            <option value="UK Expansion">UK Expansion</option>
+            <option value="Team Dinner (Day 1)">Team Dinner (Day 1)</option>
+          </optgroup>
+          <optgroup label="Day 2">
+            <option value="Functional Roadmaps">Functional Roadmaps</option>
+            <option value="Volunteer Event">Volunteer Event</option>
+            <option value="Team Dinner (Day 2)">Team Dinner (Day 2)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>How would you rate the collaboration opportunities? <span class="required">*</span></label>
+        <div class="rating-group">
+          <label class="rating-option">
+            <input type="radio" name="collaboration_rating" value="1" required>
+            <span class="rating-label">1<br><small>Poor</small></span>
+          </label>
+          <label class="rating-option">
+            <input type="radio" name="collaboration_rating" value="2">
+            <span class="rating-label">2<br><small>Fair</small></span>
+          </label>
+          <label class="rating-option">
+            <input type="radio" name="collaboration_rating" value="3">
+            <span class="rating-label">3<br><small>Good</small></span>
+          </label>
+          <label class="rating-option">
+            <input type="radio" name="collaboration_rating" value="4">
+            <span class="rating-label">4<br><small>Great</small></span>
+          </label>
+          <label class="rating-option">
+            <input type="radio" name="collaboration_rating" value="5">
+            <span class="rating-label">5<br><small>Excellent</small></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="action_item">What is one action item you're taking back to your team? <span class="required">*</span></label>
+        <textarea id="action_item" name="action_item" required rows="3" placeholder="A concrete next step..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="improve_next">What could we improve for the next offsite?</label>
+        <textarea id="improve_next" name="improve_next" rows="3" placeholder="Optional - any suggestions welcome"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="additional_comments">Anything else you'd like to share?</label>
+        <textarea id="additional_comments" name="additional_comments" rows="2" placeholder="Optional"></textarea>
+      </div>
+
+      <button type="submit" id="submit-btn">Submit Survey</button>
+    </form>
+
+    <div id="success-message" class="success-message" style="display:none;">
+      <div class="success-icon">&#10003;</div>
+      <h2>Thank you!</h2>
+      <p>Your feedback has been recorded. We appreciate you taking the time to share your thoughts.</p>
+      <a href="/results.html" class="link-btn">View Results &rarr;</a>
+    </div>
+
+    <footer>
+      <a href="/results.html">View Results &amp; Analytics</a>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("survey-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("submit-btn");
+      btn.disabled = true;
+      btn.textContent = "Submitting...";
+
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        team: form.team.value,
+        top_takeaway: form.top_takeaway.value,
+        most_valuable_session: form.most_valuable_session.value,
+        collaboration_rating: parseInt(form.collaboration_rating.value),
+        action_item: form.action_item.value,
+        improve_next: form.improve_next.value,
+        additional_comments: form.additional_comments.value,
+      };
+
+      try {
+        const res = await fetch("/api/responses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Submission failed");
+        }
+
+        form.style.display = "none";
+        document.getElementById("success-message").style.display = "block";
+      } catch (err) {
+        alert(err.message);
+        btn.disabled = false;
+        btn.textContent = "Submit Survey";
+      }
+    });
+  </script>
+</body>
+</html>
