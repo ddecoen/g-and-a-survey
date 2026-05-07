@@ -6,7 +6,6 @@
   <title>Survey Results - G&amp;A Offsite</title>
   <link rel="stylesheet" href="/style.css">
   <style>
-    /* Passphrase overlay */
     .passphrase-overlay {
       position: fixed;
       inset: 0;
@@ -25,57 +24,46 @@
       max-width: 380px;
       text-align: center;
     }
-    .passphrase-card h2 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-    .passphrase-card p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
-    }
+    .passphrase-card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .passphrase-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem; }
     .passphrase-card input[type="password"] {
-      width: 100%;
-      padding: 0.6rem 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      background: var(--bg);
-      transition: border-color 0.15s;
-      margin-bottom: 1rem;
+      width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; font-family: inherit;
+      background: var(--bg); margin-bottom: 1rem;
     }
     .passphrase-card input[type="password"]:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      outline: none; border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
     }
     .passphrase-card .unlock-btn {
-      width: 100%;
-      padding: 0.8rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s;
+      width: 100%; padding: 0.8rem; background: var(--primary); color: white;
+      border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;
     }
-    .passphrase-card .unlock-btn:hover {
-      background: var(--primary-hover);
+    .passphrase-card .unlock-btn:hover { background: var(--primary-hover); }
+    .passphrase-error { color: #ef4444; font-size: 0.85rem; margin-bottom: 0.75rem; display: none; }
+
+    .avg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .avg-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem 0.8rem; background: var(--accent); border-radius: 8px; font-size: 0.85rem;
     }
-    .passphrase-error {
-      color: #ef4444;
-      font-size: 0.85rem;
-      margin-bottom: 0.75rem;
-      display: none;
+    .avg-item .avg-label { color: var(--text); flex: 1; }
+    .avg-item .avg-val { font-weight: 700; color: var(--primary); margin-left: 0.5rem; white-space: nowrap; }
+    .text-responses { margin-top: 1rem; }
+    .text-response-card {
+      background: var(--accent); border-radius: 8px; padding: 0.8rem 1rem; margin-bottom: 0.5rem;
+    }
+    .text-response-card .resp-name {
+      font-weight: 600; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.2rem;
+    }
+    .text-response-card .resp-text { font-size: 0.9rem; }
+
+    @media (max-width: 640px) {
+      .avg-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <!-- Passphrase gate -->
   <div id="passphrase-overlay" class="passphrase-overlay">
     <div class="passphrase-card">
       <h2>Results Dashboard</h2>
@@ -108,8 +96,8 @@
           <div class="stat-label">Total Responses</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number" id="avg-rating">0</div>
-          <div class="stat-label">Avg Collaboration Rating</div>
+          <div class="stat-number" id="avg-overall">0</div>
+          <div class="stat-label">Avg Overall Value</div>
         </div>
         <div class="stat-card">
           <div class="stat-number" id="team-count">0</div>
@@ -117,26 +105,69 @@
         </div>
       </div>
 
-      <!-- Charts Row -->
-      <div class="charts-row">
+      <!-- Section 1: Overall Impact Averages -->
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Section 1: Overall Impact (Averages)</h3>
+        <div class="avg-grid" id="section1-avgs"></div>
+      </div>
+
+      <!-- Section 2: Session Effectiveness Averages -->
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Section 2: Session Effectiveness (Averages)</h3>
+        <div class="avg-grid" id="section2-avgs"></div>
+      </div>
+
+      <!-- Section 3: Collaboration & Alignment Averages -->
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Section 3: Collaboration &amp; Alignment (Averages)</h3>
+        <div class="avg-grid" id="section3-avgs"></div>
+      </div>
+
+      <!-- Section 4: Format & Structure Averages -->
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Section 4: Format &amp; Structure (Averages)</h3>
+        <div class="avg-grid" id="section4-avgs"></div>
+      </div>
+
+      <!-- Highest / Lowest Impact -->
+      <div class="charts-row" style="margin-bottom:1rem;">
         <div class="chart-card">
-          <h3>Collaboration Rating Distribution</h3>
-          <div id="rating-chart" class="bar-chart"></div>
+          <h3>Highest Impact Session Type</h3>
+          <div id="highest-chart" class="bar-chart"></div>
         </div>
         <div class="chart-card">
-          <h3>Most Valuable Sessions</h3>
-          <div id="session-chart" class="bar-chart"></div>
+          <h3>Lowest Impact Session Type</h3>
+          <div id="lowest-chart" class="bar-chart"></div>
         </div>
       </div>
 
-      <div class="chart-card" style="margin-bottom:2rem;">
+      <!-- Team breakdown -->
+      <div class="chart-card" style="margin-bottom:1.5rem;">
         <h3>Responses by Team</h3>
         <div id="team-chart" class="bar-chart"></div>
       </div>
 
-      <!-- Individual Responses -->
-      <h2 class="section-title">Individual Responses</h2>
-      <div id="responses-list"></div>
+      <!-- Open Text Sections -->
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Keep Doing (Q19)</h3>
+        <div id="text-keep" class="text-responses"></div>
+      </div>
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Change Next Time (Q20)</h3>
+        <div id="text-change" class="text-responses"></div>
+      </div>
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Stop Doing (Q21)</h3>
+        <div id="text-stop" class="text-responses"></div>
+      </div>
+      <div class="chart-card" style="margin-bottom:1rem;">
+        <h3>Missing Topics (Q22)</h3>
+        <div id="text-missing" class="text-responses"></div>
+      </div>
+      <div class="chart-card" style="margin-bottom:1.5rem;">
+        <h3>More Impactful Next Time (Q23)</h3>
+        <div id="text-impactful" class="text-responses"></div>
+      </div>
 
       <div id="no-data" class="no-data" style="display:none;">
         <p>No responses yet. <a href="/">Be the first to submit!</a></p>
@@ -145,9 +176,7 @@
   </div>
 
   <script>
-    function getPassphrase() {
-      return sessionStorage.getItem("passphrase") || "";
-    }
+    function getPassphrase() { return sessionStorage.getItem("passphrase") || ""; }
 
     function showPassphrasePrompt(showError) {
       sessionStorage.removeItem("passphrase");
@@ -170,53 +199,67 @@
     }
 
     document.getElementById("unlock-btn").addEventListener("click", handleUnlock);
-    document.getElementById("passphrase-input").addEventListener("keydown", function (e) {
+    document.getElementById("passphrase-input").addEventListener("keydown", function(e) {
       if (e.key === "Enter") handleUnlock();
     });
 
-    // CSV export via fetch with passphrase header.
-    document.getElementById("export-btn").addEventListener("click", async function () {
+    document.getElementById("export-btn").addEventListener("click", async function() {
       try {
-        var res = await fetch("/api/export", {
-          headers: { "x-passphrase": getPassphrase() },
-        });
-        if (res.status === 401) {
-          showPassphrasePrompt(true);
-          return;
-        }
+        var res = await fetch("/api/export", { headers: { "x-passphrase": getPassphrase() } });
+        if (res.status === 401) { showPassphrasePrompt(true); return; }
         if (!res.ok) throw new Error("Export failed");
         var blob = await res.blob();
         var url = URL.createObjectURL(blob);
         var a = document.createElement("a");
-        a.href = url;
-        a.download = "survey-results.csv";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        a.href = url; a.download = "ga-offsite-survey-results.csv";
+        document.body.appendChild(a); a.click(); a.remove();
         URL.revokeObjectURL(url);
-      } catch (err) {
-        console.error(err);
-        alert("Failed to export CSV.");
-      }
+      } catch (err) { console.error(err); alert("Failed to export CSV."); }
     });
 
     function createBar(label, value, max, color) {
       const pct = max > 0 ? (value / max) * 100 : 0;
-      return `
-        <div class="bar-row">
-          <span class="bar-label">${label}</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${pct}%;background:${color}"></div>
-          </div>
-          <span class="bar-value">${value}</span>
-        </div>
-      `;
+      return `<div class="bar-row">
+        <span class="bar-label">${label}</span>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>
+        <span class="bar-value">${value}</span>
+      </div>`;
+    }
+
+    function renderAvgGrid(containerId, items) {
+      let html = "";
+      items.forEach(([label, val]) => {
+        const v = val != null ? val : "N/A";
+        html += `<div class="avg-item"><span class="avg-label">${label}</span><span class="avg-val">${v} / 5</span></div>`;
+      });
+      document.getElementById(containerId).innerHTML = html;
+    }
+
+    function renderTextResponses(containerId, responses, field) {
+      const items = responses.filter((r) => r[field]);
+      if (items.length === 0) {
+        document.getElementById(containerId).innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem;">No responses.</p>';
+        return;
+      }
+      let html = "";
+      items.forEach((r) => {
+        html += `<div class="text-response-card">
+          <div class="resp-name">${escapeHtml(r.name)} (${escapeHtml(r.team)})</div>
+          <div class="resp-text">${escapeHtml(r[field])}</div>
+        </div>`;
+      });
+      document.getElementById(containerId).innerHTML = html;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
     }
 
     async function loadDashboard() {
       try {
         const headers = { "x-passphrase": getPassphrase() };
-
         const [statsRes, responsesRes] = await Promise.all([
           fetch("/api/stats", { headers }),
           fetch("/api/responses", { headers }),
@@ -240,91 +283,81 @@
           return;
         }
 
+        const r = stats.ratings;
+
         // Summary cards
         document.getElementById("total-responses").textContent = stats.totalResponses;
-        document.getElementById("avg-rating").textContent = stats.avgCollaborationRating + " / 5";
+        document.getElementById("avg-overall").textContent = (r.overall_value || 0) + " / 5";
         document.getElementById("team-count").textContent = stats.teamBreakdown.length;
 
-        // Rating distribution chart
-        const ratingMax = Math.max(...stats.ratingDistribution.map((r) => r.count), 1);
-        const ratingColors = ["#ef4444", "#f97316", "#eab308", "#22c55e", "#10b981"];
-        const ratingLabels = ["1 - Poor", "2 - Fair", "3 - Good", "4 - Great", "5 - Excellent"];
-        let ratingHTML = "";
-        for (let i = 1; i <= 5; i++) {
-          const found = stats.ratingDistribution.find((r) => r.rating === i);
-          const count = found ? found.count : 0;
-          ratingHTML += createBar(ratingLabels[i - 1], count, ratingMax, ratingColors[i - 1]);
-        }
-        document.getElementById("rating-chart").innerHTML = ratingHTML;
+        // Section 1
+        renderAvgGrid("section1-avgs", [
+          ["Overall value", r.overall_value],
+          ["Strategy understanding", r.strategy_understanding],
+          ["Job impact", r.job_impact],
+          ["Relationships", r.relationships],
+        ]);
 
-        // Sessions chart
-        const sessionMax = Math.max(...stats.topSessions.map((s) => s.count), 1);
-        let sessionHTML = "";
-        stats.topSessions.forEach((s, i) => {
-          sessionHTML += createBar(s.session, s.count, sessionMax, "#6366f1");
-        });
-        document.getElementById("session-chart").innerHTML = sessionHTML;
+        // Section 2
+        renderAvgGrid("section2-avgs", [
+          ["AMAs (CEO + Leadership)", r.amas_rating],
+          ["Strategy & Scaling", r.strategy_sessions_rating],
+          ["Team Breakouts & Working", r.team_breakouts_rating],
+          ["AI / Skill-Building", r.ai_sessions_rating],
+          ["Team Building & Social", r.social_activities_rating],
+        ]);
+
+        // Section 3
+        renderAvgGrid("section3-avgs", [
+          ["G&A alignment", r.ga_alignment],
+          ["G&A participation", r.ga_participation],
+          ["Non-G&A participation", r.non_ga_participation],
+          ["Cross-functional collab", r.cross_func_collab],
+          ["Cross-functional challenges", r.cross_func_challenges],
+        ]);
+
+        // Section 4
+        renderAvgGrid("section4-avgs", [
+          ["Presentation/activity balance", r.balance_rating],
+          ["Strategic vs. tactical mix", r.strategic_tactical_rating],
+          ["Agenda pacing", r.pacing_rating],
+          ["Social events value", r.social_events_value],
+        ]);
+
+        // Highest/Lowest impact charts
+        const si = stats.sessionImpact;
+        const hMax = si.highest.length > 0 ? Math.max(...si.highest.map((s) => s.count)) : 1;
+        let hHTML = "";
+        si.highest.forEach((s) => { hHTML += createBar(s.session, s.count, hMax, "#22c55e"); });
+        document.getElementById("highest-chart").innerHTML = hHTML || '<p style="color:var(--text-muted);font-size:0.9rem;">No responses.</p>';
+
+        const lMax = si.lowest.length > 0 ? Math.max(...si.lowest.map((s) => s.count)) : 1;
+        let lHTML = "";
+        si.lowest.forEach((s) => { lHTML += createBar(s.session, s.count, lMax, "#ef4444"); });
+        document.getElementById("lowest-chart").innerHTML = lHTML || '<p style="color:var(--text-muted);font-size:0.9rem;">No responses.</p>';
 
         // Team chart
         const teamMax = Math.max(...stats.teamBreakdown.map((t) => t.count), 1);
-        const teamColors = ["#8b5cf6", "#06b6d4", "#f59e0b", "#ec4899", "#14b8a6", "#f43f5e", "#64748b"];
+        const teamColors = ["#8b5cf6", "#06b6d4", "#f59e0b", "#ec4899", "#14b8a6"];
         let teamHTML = "";
         stats.teamBreakdown.forEach((t, i) => {
           teamHTML += createBar(t.team, t.count, teamMax, teamColors[i % teamColors.length]);
         });
         document.getElementById("team-chart").innerHTML = teamHTML;
 
-        // Individual responses
-        let listHTML = "";
-        responses.forEach((r) => {
-          const date = new Date(r.submitted_at + "Z").toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-          });
-          listHTML += `
-            <div class="response-card">
-              <div class="response-header">
-                <strong>${escapeHtml(r.name)}</strong>
-                <span class="response-meta">${escapeHtml(r.team)} &middot; ${date}</span>
-              </div>
-              <div class="response-field">
-                <span class="field-label">Top Takeaway:</span>
-                <p>${escapeHtml(r.top_takeaway)}</p>
-              </div>
-              <div class="response-field">
-                <span class="field-label">Most Valuable Session:</span>
-                <p>${escapeHtml(r.most_valuable_session)}</p>
-              </div>
-              <div class="response-field">
-                <span class="field-label">Collaboration Rating:</span>
-                <p>${"&#9733;".repeat(r.collaboration_rating)}${"&#9734;".repeat(5 - r.collaboration_rating)}</p>
-              </div>
-              <div class="response-field">
-                <span class="field-label">Action Item:</span>
-                <p>${escapeHtml(r.action_item)}</p>
-              </div>
-              ${r.improve_next ? `<div class="response-field"><span class="field-label">Improvement Ideas:</span><p>${escapeHtml(r.improve_next)}</p></div>` : ""}
-              ${r.additional_comments ? `<div class="response-field"><span class="field-label">Additional Comments:</span><p>${escapeHtml(r.additional_comments)}</p></div>` : ""}
-            </div>
-          `;
-        });
-        document.getElementById("responses-list").innerHTML = listHTML;
+        // Open text sections
+        renderTextResponses("text-keep", responses, "keep_doing");
+        renderTextResponses("text-change", responses, "change_next");
+        renderTextResponses("text-stop", responses, "stop_doing");
+        renderTextResponses("text-missing", responses, "missing_topic");
+        renderTextResponses("text-impactful", responses, "more_impactful");
+
       } catch (err) {
         document.getElementById("loading").textContent = "Failed to load results. Please try again.";
         console.error(err);
       }
     }
 
-    function escapeHtml(text) {
-      const div = document.createElement("div");
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // If a passphrase is already stored in the session, try loading
-    // directly. Otherwise show the prompt.
     if (sessionStorage.getItem("passphrase")) {
       loadDashboard();
     } else {

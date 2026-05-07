@@ -11,88 +11,331 @@
     <header>
       <div class="badge">G&amp;A Offsite</div>
       <h1>Santa Cruz Offsite Survey</h1>
-      <p class="subtitle">May 2026 &middot; Share your biggest takeaways</p>
+      <p class="subtitle">May 2026 &middot; Share your feedback</p>
     </header>
 
     <form id="survey-form">
-      <div class="form-group">
-        <label for="name">Your Name <span class="required">*</span></label>
-        <input type="text" id="name" name="name" required placeholder="e.g. Jane Smith">
-      </div>
-
-      <div class="form-group">
-        <label for="team">Team / Function <span class="required">*</span></label>
-        <select id="team" name="team" required>
-          <option value="">Select your team...</option>
-          <option value="People">People</option>
-          <option value="Finance">Finance</option>
-          <option value="Accounting">Accounting</option>
-          <option value="IT">IT</option>
-          <option value="Recruiting">Recruiting</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="top_takeaway">What was your #1 takeaway from the offsite? <span class="required">*</span></label>
-        <textarea id="top_takeaway" name="top_takeaway" required rows="3" placeholder="What stuck with you most?"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="most_valuable_session">Which session or activity was most valuable? <span class="required">*</span></label>
-        <select id="most_valuable_session" name="most_valuable_session" required>
-          <option value="">Select a session...</option>
-          <optgroup label="Day 1">
-            <option value="People and Finance at Scale">People and Finance at Scale</option>
-            <option value="UK Expansion">UK Expansion</option>
-            <option value="Team Dinner (Day 1)">Team Dinner (Day 1)</option>
-          </optgroup>
-          <optgroup label="Day 2">
-            <option value="Functional Roadmaps">Functional Roadmaps</option>
-            <option value="Volunteer Event">Volunteer Event</option>
-            <option value="Team Dinner (Day 2)">Team Dinner (Day 2)</option>
-          </optgroup>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>How would you rate the collaboration opportunities? <span class="required">*</span></label>
-        <div class="rating-group">
-          <label class="rating-option">
-            <input type="radio" name="collaboration_rating" value="1" required>
-            <span class="rating-label">1<br><small>Poor</small></span>
-          </label>
-          <label class="rating-option">
-            <input type="radio" name="collaboration_rating" value="2">
-            <span class="rating-label">2<br><small>Fair</small></span>
-          </label>
-          <label class="rating-option">
-            <input type="radio" name="collaboration_rating" value="3">
-            <span class="rating-label">3<br><small>Good</small></span>
-          </label>
-          <label class="rating-option">
-            <input type="radio" name="collaboration_rating" value="4">
-            <span class="rating-label">4<br><small>Great</small></span>
-          </label>
-          <label class="rating-option">
-            <input type="radio" name="collaboration_rating" value="5">
-            <span class="rating-label">5<br><small>Excellent</small></span>
-          </label>
+      <!-- Respondent Info -->
+      <div class="section-card">
+        <div class="form-group">
+          <label for="name">Your Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="e.g. Jane Smith">
+        </div>
+        <div class="form-group">
+          <label for="team">Team / Function <span class="required">*</span></label>
+          <select id="team" name="team" required>
+            <option value="">Select your team...</option>
+            <option value="People">People</option>
+            <option value="Finance">Finance</option>
+            <option value="Accounting">Accounting</option>
+            <option value="IT">IT</option>
+            <option value="Recruiting">Recruiting</option>
+          </select>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="action_item">What is one action item you're taking back to your team? <span class="required">*</span></label>
-        <textarea id="action_item" name="action_item" required rows="3" placeholder="A concrete next step..."></textarea>
+      <!-- Section 1: Overall Impact -->
+      <div class="section-card">
+        <h2 class="section-heading">Section 1: Overall Impact</h2>
+
+        <div class="form-group">
+          <label>1. Overall, how valuable was the G&amp;A offsite? <span class="required">*</span></label>
+          <p class="scale-hint">1 = Not valuable, 5 = Extremely valuable</p>
+          <div class="rating-group" data-name="overall_value">
+            <label class="rating-option"><input type="radio" name="overall_value" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="overall_value" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="overall_value" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="overall_value" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="overall_value" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="overall_value_comment" rows="2" placeholder="Optional: What specifically drove your rating?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>2. To what extent did the offsite improve your understanding of Coder's strategy and priorities? <span class="required">*</span></label>
+          <p class="scale-hint">1 = Not at all, 5 = Significantly</p>
+          <div class="rating-group" data-name="strategy_understanding">
+            <label class="rating-option"><input type="radio" name="strategy_understanding" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_understanding" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_understanding" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_understanding" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_understanding" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="strategy_understanding_comment" rows="2" placeholder="Optional: What became clearer?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>3. How impactful was the offsite on your ability to do your job better? <span class="required">*</span></label>
+          <p class="scale-hint">1 = No impact, 5 = High impact</p>
+          <div class="rating-group" data-name="job_impact">
+            <label class="rating-option"><input type="radio" name="job_impact" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="job_impact" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="job_impact" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="job_impact" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="job_impact" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="job_impact_comment" rows="2" placeholder="Optional: What will you do differently as a result?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>4. The offsite helped me build or strengthen relationships with colleagues <span class="required">*</span></label>
+          <p class="scale-hint">1 = Not at all, 5 = Significantly</p>
+          <div class="rating-group" data-name="relationships">
+            <label class="rating-option"><input type="radio" name="relationships" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="relationships" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="relationships" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="relationships" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="relationships" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="relationships_comment" rows="2" placeholder="Optional: With whom or in what way?"></textarea>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="improve_next">What could we improve for the next offsite?</label>
-        <textarea id="improve_next" name="improve_next" rows="3" placeholder="Optional - any suggestions welcome"></textarea>
+      <!-- Section 2: Session Effectiveness -->
+      <div class="section-card">
+        <h2 class="section-heading">Section 2: Session Effectiveness</h2>
+        <p class="section-desc">Rate the overall impact of each category of sessions.</p>
+
+        <div class="form-group">
+          <label>5. AMAs (CEO + Coder Leadership) <span class="required">*</span></label>
+          <div class="rating-group" data-name="amas_rating">
+            <label class="rating-option"><input type="radio" name="amas_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="amas_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="amas_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="amas_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="amas_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="amas_comment" rows="2" placeholder="Optional: What worked / what didn't?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>6. Strategy &amp; Scaling Sessions (e.g., Scaling Coder, International Expansion) <span class="required">*</span></label>
+          <div class="rating-group" data-name="strategy_sessions_rating">
+            <label class="rating-option"><input type="radio" name="strategy_sessions_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_sessions_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_sessions_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_sessions_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="strategy_sessions_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="strategy_sessions_comment" rows="2" placeholder="Optional comments"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>7. Team Breakouts &amp; Working Sessions (Finance &amp; Ops, People sessions, presentations, discussions) <span class="required">*</span></label>
+          <div class="rating-group" data-name="team_breakouts_rating">
+            <label class="rating-option"><input type="radio" name="team_breakouts_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="team_breakouts_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="team_breakouts_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="team_breakouts_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="team_breakouts_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="team_breakouts_comment" rows="2" placeholder="Optional comments"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>8. AI / Skill-Building Sessions (e.g., AI workshop, Claude activity) <span class="required">*</span></label>
+          <div class="rating-group" data-name="ai_sessions_rating">
+            <label class="rating-option"><input type="radio" name="ai_sessions_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="ai_sessions_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="ai_sessions_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="ai_sessions_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="ai_sessions_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="ai_sessions_comment" rows="2" placeholder="Optional comments"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>9. Team Building &amp; Social Activities (icebreaker, dinners, bonfire, community service) <span class="required">*</span></label>
+          <div class="rating-group" data-name="social_activities_rating">
+            <label class="rating-option"><input type="radio" name="social_activities_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="social_activities_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="social_activities_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="social_activities_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="social_activities_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="social_activities_comment" rows="2" placeholder="Optional comments"></textarea>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="additional_comments">Anything else you'd like to share?</label>
-        <textarea id="additional_comments" name="additional_comments" rows="2" placeholder="Optional"></textarea>
+      <!-- Section 3: Collaboration & Alignment -->
+      <div class="section-card">
+        <h2 class="section-heading">Section 3: Collaboration &amp; Alignment</h2>
+
+        <div class="form-group">
+          <label>10. The offsite improved alignment within the G&amp;A organization <span class="required">*</span></label>
+          <p class="scale-hint">1 = Not at all, 5 = Significantly</p>
+          <div class="rating-group" data-name="ga_alignment">
+            <label class="rating-option"><input type="radio" name="ga_alignment" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="ga_alignment" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="ga_alignment" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="ga_alignment" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="ga_alignment" value="5"><span class="rating-label">5</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>11. I feel we had the right level of participation and buy-in from G&amp;A team members <span class="required">*</span></label>
+          <p class="scale-hint">1 = Strongly disagree, 5 = Strongly agree</p>
+          <div class="rating-group" data-name="ga_participation">
+            <label class="rating-option"><input type="radio" name="ga_participation" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="ga_participation" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="ga_participation" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="ga_participation" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="ga_participation" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="ga_participation_comment" rows="2" placeholder="Optional: What could improve?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>12. I feel we had the right level of participation and buy-in from non-G&amp;A partners (R&amp;D, Revenue, etc.) <span class="required">*</span></label>
+          <p class="scale-hint">1 = Strongly disagree, 5 = Strongly agree</p>
+          <div class="rating-group" data-name="non_ga_participation">
+            <label class="rating-option"><input type="radio" name="non_ga_participation" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="non_ga_participation" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="non_ga_participation" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="non_ga_participation" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="non_ga_participation" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="non_ga_participation_comment" rows="2" placeholder="Optional: What was missing or could be improved?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>13. The offsite improved collaboration between G&amp;A and other functions <span class="required">*</span></label>
+          <p class="scale-hint">1 = Not at all, 5 = Significantly</p>
+          <div class="rating-group" data-name="cross_func_collab">
+            <label class="rating-option"><input type="radio" name="cross_func_collab" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_collab" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_collab" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_collab" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_collab" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="cross_func_collab_comment" rows="2" placeholder="Optional: Where did we still fall short?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>14. How effectively did the offsite address real cross-functional challenges (vs. G&amp;A-only topics)? <span class="required">*</span></label>
+          <div class="rating-group" data-name="cross_func_challenges">
+            <label class="rating-option"><input type="radio" name="cross_func_challenges" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_challenges" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_challenges" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_challenges" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="cross_func_challenges" value="5"><span class="rating-label">5</span></label>
+          </div>
+          <textarea name="cross_func_challenges_comment" rows="2" placeholder="Optional: What should we have focused on instead?"></textarea>
+        </div>
+      </div>
+
+      <!-- Section 4: Format & Structure -->
+      <div class="section-card">
+        <h2 class="section-heading">Section 4: Format &amp; Structure</h2>
+
+        <div class="form-group">
+          <label>15. The balance between presentations, working sessions, and interactive activities was effective <span class="required">*</span></label>
+          <div class="rating-group" data-name="balance_rating">
+            <label class="rating-option"><input type="radio" name="balance_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="balance_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="balance_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="balance_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="balance_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>16. The offsite had the right mix of strategic vs. tactical content <span class="required">*</span></label>
+          <div class="rating-group" data-name="strategic_tactical_rating">
+            <label class="rating-option"><input type="radio" name="strategic_tactical_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="strategic_tactical_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="strategic_tactical_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="strategic_tactical_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="strategic_tactical_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>17. The agenda pacing (timing, breaks, session length) was effective <span class="required">*</span></label>
+          <div class="rating-group" data-name="pacing_rating">
+            <label class="rating-option"><input type="radio" name="pacing_rating" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="pacing_rating" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="pacing_rating" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="pacing_rating" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="pacing_rating" value="5"><span class="rating-label">5</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>18. The social events added value to the overall experience <span class="required">*</span></label>
+          <div class="rating-group" data-name="social_events_value">
+            <label class="rating-option"><input type="radio" name="social_events_value" value="1" required><span class="rating-label">1</span></label>
+            <label class="rating-option"><input type="radio" name="social_events_value" value="2"><span class="rating-label">2</span></label>
+            <label class="rating-option"><input type="radio" name="social_events_value" value="3"><span class="rating-label">3</span></label>
+            <label class="rating-option"><input type="radio" name="social_events_value" value="4"><span class="rating-label">4</span></label>
+            <label class="rating-option"><input type="radio" name="social_events_value" value="5"><span class="rating-label">5</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Keep / Change / Stop -->
+      <div class="section-card">
+        <h2 class="section-heading">Section 5: Keep / Change / Stop</h2>
+
+        <div class="form-group">
+          <label for="keep_doing">19. What should we definitely keep doing in future offsites?</label>
+          <textarea id="keep_doing" name="keep_doing" rows="3" placeholder="What worked well..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="change_next">20. What should we do differently next time?</label>
+          <textarea id="change_next" name="change_next" rows="3" placeholder="Suggestions for improvement..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="stop_doing">21. What should we stop doing?</label>
+          <textarea id="stop_doing" name="stop_doing" rows="3" placeholder="What didn't add value..."></textarea>
+        </div>
+      </div>
+
+      <!-- Section 6: Forward-Looking -->
+      <div class="section-card">
+        <h2 class="section-heading">Section 6: Forward-Looking</h2>
+
+        <div class="form-group">
+          <label for="missing_topic">22. What is one topic or session you wish we had included but didn't?</label>
+          <textarea id="missing_topic" name="missing_topic" rows="3" placeholder="Topics we missed..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="more_impactful">23. What would make the next offsite significantly more impactful for you?</label>
+          <textarea id="more_impactful" name="more_impactful" rows="3" placeholder="Your vision for the next one..."></textarea>
+        </div>
+      </div>
+
+      <!-- Optional Add-On -->
+      <div class="section-card">
+        <h2 class="section-heading">Optional: Session Impact</h2>
+
+        <div class="form-group">
+          <label for="highest_impact_session">24. Which session type had the highest impact for you?</label>
+          <select id="highest_impact_session" name="highest_impact_session">
+            <option value="">Select one...</option>
+            <option value="AMAs">AMAs</option>
+            <option value="Strategy sessions">Strategy sessions</option>
+            <option value="Breakouts / working sessions">Breakouts / working sessions</option>
+            <option value="AI / skill-building">AI / skill-building</option>
+            <option value="Team-building / social">Team-building / social</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="lowest_impact_session">25. Which session type had the lowest impact?</label>
+          <select id="lowest_impact_session" name="lowest_impact_session">
+            <option value="">Select one...</option>
+            <option value="AMAs">AMAs</option>
+            <option value="Strategy sessions">Strategy sessions</option>
+            <option value="Breakouts / working sessions">Breakouts / working sessions</option>
+            <option value="AI / skill-building">AI / skill-building</option>
+            <option value="Team-building / social">Team-building / social</option>
+          </select>
+        </div>
       </div>
 
       <button type="submit" id="submit-btn">Submit Survey</button>
@@ -101,7 +344,7 @@
     <div id="success-message" class="success-message" style="display:none;">
       <div class="success-icon">&#10003;</div>
       <h2>Thank you!</h2>
-      <p>Your feedback has been recorded. We appreciate you taking the time to share your thoughts.</p>
+      <p>Your feedback has been recorded. We appreciate you taking the time to share your thoughts about the Santa Cruz offsite.</p>
       <a href="/results.html" class="link-btn">View Results &rarr;</a>
     </div>
 
@@ -118,15 +361,53 @@
       btn.textContent = "Submitting...";
 
       const form = e.target;
+
+      function radio(name) {
+        const el = form.querySelector(`input[name="${name}"]:checked`);
+        return el ? parseInt(el.value) : null;
+      }
+
       const data = {
         name: form.name.value,
         team: form.team.value,
-        top_takeaway: form.top_takeaway.value,
-        most_valuable_session: form.most_valuable_session.value,
-        collaboration_rating: parseInt(form.collaboration_rating.value),
-        action_item: form.action_item.value,
-        improve_next: form.improve_next.value,
-        additional_comments: form.additional_comments.value,
+        overall_value: radio("overall_value"),
+        overall_value_comment: form.overall_value_comment.value,
+        strategy_understanding: radio("strategy_understanding"),
+        strategy_understanding_comment: form.strategy_understanding_comment.value,
+        job_impact: radio("job_impact"),
+        job_impact_comment: form.job_impact_comment.value,
+        relationships: radio("relationships"),
+        relationships_comment: form.relationships_comment.value,
+        amas_rating: radio("amas_rating"),
+        amas_comment: form.amas_comment.value,
+        strategy_sessions_rating: radio("strategy_sessions_rating"),
+        strategy_sessions_comment: form.strategy_sessions_comment.value,
+        team_breakouts_rating: radio("team_breakouts_rating"),
+        team_breakouts_comment: form.team_breakouts_comment.value,
+        ai_sessions_rating: radio("ai_sessions_rating"),
+        ai_sessions_comment: form.ai_sessions_comment.value,
+        social_activities_rating: radio("social_activities_rating"),
+        social_activities_comment: form.social_activities_comment.value,
+        ga_alignment: radio("ga_alignment"),
+        ga_participation: radio("ga_participation"),
+        ga_participation_comment: form.ga_participation_comment.value,
+        non_ga_participation: radio("non_ga_participation"),
+        non_ga_participation_comment: form.non_ga_participation_comment.value,
+        cross_func_collab: radio("cross_func_collab"),
+        cross_func_collab_comment: form.cross_func_collab_comment.value,
+        cross_func_challenges: radio("cross_func_challenges"),
+        cross_func_challenges_comment: form.cross_func_challenges_comment.value,
+        balance_rating: radio("balance_rating"),
+        strategic_tactical_rating: radio("strategic_tactical_rating"),
+        pacing_rating: radio("pacing_rating"),
+        social_events_value: radio("social_events_value"),
+        keep_doing: form.keep_doing.value,
+        change_next: form.change_next.value,
+        stop_doing: form.stop_doing.value,
+        missing_topic: form.missing_topic.value,
+        more_impactful: form.more_impactful.value,
+        highest_impact_session: form.highest_impact_session.value,
+        lowest_impact_session: form.lowest_impact_session.value,
       };
 
       try {
@@ -143,6 +424,7 @@
 
         form.style.display = "none";
         document.getElementById("success-message").style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (err) {
         alert(err.message);
         btn.disabled = false;
